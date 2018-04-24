@@ -24,7 +24,7 @@ mongoose.connect('mongodb://localhost/simple-login');
 
 
 // signup route with placeholder response
-app.get('/signup', function (req, res) {
+app.get('/', function (req, res) {
   //render takes a relative path to whatever directory we designated as having all the view files.
   res.render('signup');
 });
