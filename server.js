@@ -11,6 +11,8 @@ var session = require('express-session')
 // middleware
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
+app.set('port', process.env.PORT || 3000)
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
 	saveUnitialized : true,
@@ -59,6 +61,11 @@ app.get('/login', function (req, res) {
 });
 
 // listen on port 3000
-app.listen(3000, function () {
-  console.log('server started on locahost:3000');
-});
+// app.listen(3000, function () {
+//   console.log('server started on locahost:3000');
+// });
+
+
+app.listen(app.get('port'), () => {
+	console.log(`✅ PORT: ${app.get('port')} 🌟`)
+})
