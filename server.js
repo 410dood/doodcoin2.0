@@ -20,7 +20,7 @@ app.use(session({
 	secret:'SuperSecretCookie',
 	cookie:{maxAge:30*60*1000}
 }));
-mongoose.connect('mongodb://localhost/simple-login');
+mongoose.connect('mongodb://localhost/doodCoin');
 
 app.get('/', function (req, res) {
 	//render takes a relative path to whatever directory we designated as having all the view files.
