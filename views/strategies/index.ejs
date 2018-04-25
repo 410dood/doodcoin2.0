@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Strategy List</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div class="container">
+      <h3><a href="/strategies/create">Create Strategy</a></h3>
+      <h1>Strategy List</h1>
+      <% if(strategies.length>0) { %>
+      <table class="list-table">
+        <thead>
+          <tr>
+            <th>Strategy Name</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <% for(var i=0; i<strategies.length;i++) { %>
+            <tr>
+              <td><a href="/strategies/show/<%= strategies[i]._id%>"><%= strategies[i].name%></a></td>
+              <td><%= strategies[i].position%></td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <div>No strategies found.</div>
+      <% } %>
+    </div>
+  </body>
+</html>

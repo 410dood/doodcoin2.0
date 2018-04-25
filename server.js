@@ -1,12 +1,23 @@
-var express = require('express'),
-  app = express(),
-  bodyParser = 	require('body-parser'),
-	mongoose = 		require('mongoose');
-	
+const express = require('express'),
+	app = express(),
+	bodyParser = require('body-parser'),
+	mongoose = require('mongoose');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+mongoose.Promise = global.Promise;
 
-	var User = 			require('./app/models/user')
-var session = 	require('express-session')
+var User = require('./app/models/user')
+var session = require('express-session')
 
+mongoose.connect('mongodb://localhost/strategy')
+	.then(() => console.log('connection succesful'))
+	.catch((err) => console.error(err));
+
+var index = require('./app/routes/index');
+var users = require('./app/routes/users');
+var strategies = require('./app/routes/strategies');
 
 // middleware
 app.use(express.static('public'));
@@ -16,7 +27,6 @@ app.set('port', process.env.PORT || 3000)
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json())
-const dbConfig = require('./config/database.config.js');
 
 app.use(session({
 	saveUnitialized : true,
@@ -26,14 +36,12 @@ app.use(session({
 }));
 mongoose.connect('mongodb://localhost/doodCoin');
 
-mongoose.connect(dbConfig.url)
-	.then(() => {
-		console.log("Successfully connected to the database");
-	}).catch(err => {
-		console.log('Could not connect to the database. Exiting now...');
-		process.exit();
-	});
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/', index);
+app.use('/users', users);
+app.use('/strategies', strategies);
 
 
 app.get('/', function (req, res) {
@@ -51,10 +59,6 @@ app.get('/signup', function (req, res) {
 app.get('/home', function (req, res) {
 	res.render('home');
 });
-
-app.post('/quotes', (req, res) => {
-	console.log('Hellooooooooooooooooo!')
-})
 
 //going to get the data from the signup form, hash it, and store in the database
 app.post("/signup", function(req, res){
@@ -87,7 +91,12 @@ app.get('/login', function (req, res) {
 //   console.log('server started on locahost:3000');
 // });
 
-
 app.listen(app.get('port'), () => {
 	console.log(`✅ PORT: ${app.get('port')} 🌟`)
 })
+
+
+//////
+
+
+
