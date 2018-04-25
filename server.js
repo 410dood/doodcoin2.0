@@ -1,19 +1,23 @@
-// server.js
-
-// require express framework and additional modules
 var express = require('express'),
   app = express(),
-  bodyParser = require('body-parser'),
-  mongoose = require('mongoose');
-var User = require('./models/user')
-var session = require('express-session')
+  bodyParser = 	require('body-parser'),
+	mongoose = 		require('mongoose');
+	
+
+	var User = 			require('./app/models/user')
+var session = 	require('express-session')
+
 
 // middleware
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.set('port', process.env.PORT || 3000)
 
+
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
+const dbConfig = require('./config/database.config.js');
+
 app.use(session({
 	saveUnitialized : true,
 	resave:true,
@@ -21,6 +25,16 @@ app.use(session({
 	cookie:{maxAge:30*60*1000}
 }));
 mongoose.connect('mongodb://localhost/doodCoin');
+
+mongoose.connect(dbConfig.url)
+	.then(() => {
+		console.log("Successfully connected to the database");
+	}).catch(err => {
+		console.log('Could not connect to the database. Exiting now...');
+		process.exit();
+	});
+
+
 
 app.get('/', function (req, res) {
 	//render takes a relative path to whatever directory we designated as having all the view files.
@@ -38,6 +52,9 @@ app.get('/home', function (req, res) {
 	res.render('home');
 });
 
+app.post('/quotes', (req, res) => {
+	console.log('Hellooooooooooooooooo!')
+})
 
 //going to get the data from the signup form, hash it, and store in the database
 app.post("/signup", function(req, res){
