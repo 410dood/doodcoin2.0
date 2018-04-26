@@ -14,6 +14,7 @@
           <tr>
             <th>Strategy Name</th>
             <th>Position</th>
+            <th>User Name</th>
           </tr>
         </thead>
         <tbody>
@@ -21,7 +22,10 @@
           <% for(var i=0; i<strategies.length;i++) { %>
             <tr>
               <td><a href="/strategies/show/<%= strategies[i]._id%>"><%= strategies[i].name%></a></td>
-              <td><%= strategies[i].position%></td>
+              <td><%= strategies[i].name%></td>
+              <td><%= strategies[i].variables%></td>
+
+                 
             </tr>
           <% } %>
         </tbody>

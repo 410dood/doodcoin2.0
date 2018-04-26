@@ -15,7 +15,7 @@ strategyController.list = function(req, res) {
   });
 };
 
-// Show employee by id
+// Show strategy by id
 strategyController.show = function(req, res) {
   Strategy.findOne({_id: req.params.id}).exec(function (err, strategy) {
     if (err) {
@@ -27,12 +27,12 @@ strategyController.show = function(req, res) {
   });
 };
 
-// Create new employee
+// Create new strategy
 strategyController.create = function(req, res) {
   res.render("../views/strategies/create");
 };
 
-// Save new employee
+// Save new strategy
 strategyController.save = function(req, res) {
   var strategy = new Strategy(req.body);
 
@@ -47,7 +47,7 @@ strategyController.save = function(req, res) {
   });
 };
 
-// Edit an employee
+// Edit an strategy
 strategyController.edit = function(req, res) {
   Strategy.findOne({_id: req.params.id}).exec(function (err, strategy) {
     if (err) {
@@ -59,9 +59,9 @@ strategyController.edit = function(req, res) {
   });
 };
 
-// Update an employee
+// Update an strategy
 strategyController.update = function(req, res) {
-  Strategy.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, address: req.body.address, position: req.body.position, salary: req.body.salary }}, { new: true }, function (err, strategy) {
+  Strategy.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, variables: req.body.address, currency: req.body.position, coin: req.body.salary }}, { new: true }, function (err, strategy) {
     if (err) {
       console.log(err);
       res.render("../views/strategies/edit", {strategy: req.body});
@@ -70,7 +70,7 @@ strategyController.update = function(req, res) {
   });
 };
 
-// Delete an employee
+// Delete an strategy
 strategyController.delete = function(req, res) {
   Strategy.remove({_id: req.params.id}, function(err) {
     if(err) {

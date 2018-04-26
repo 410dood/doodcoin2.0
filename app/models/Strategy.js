@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var StrategySchema = new mongoose.Schema({
   name: String,
-  address: String,
-  position: String,
-  salary: Number,
+  variables: String,
+  currency: String,
+  coin: Number,
   updated_at: { type: Date, default: Date.now },
 });
 

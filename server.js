@@ -1,3 +1,4 @@
+const ejsLint = require('ejs-lint');
 const express = require('express'),
 	app = express(),
 	bodyParser = require('body-parser'),
@@ -39,7 +40,6 @@ mongoose.connect('mongodb://localhost/doodCoin');
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
 app.use('/users', users);
 app.use('/strategies', strategies);
 
