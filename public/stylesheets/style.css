@@ -10,9 +10,9 @@ a {
 }
 
 .container {
-  padding: 20px;
+  padding: 30px;
   background-color: #efefef;
-  width: 400px;
+  width: 800px;
   border-radius: 6px;
 }
 .container h3 a {
@@ -65,7 +65,7 @@ a {
 }
 
 .container .list-table {
-  width: 360px;
+  width: 760px;
   border: solid 2px #DDDDDD;
   border-spacing: 0;
 }

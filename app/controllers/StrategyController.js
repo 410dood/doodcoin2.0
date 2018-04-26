@@ -17,6 +17,8 @@ strategyController.list = function(req, res) {
 
 // Show strategy by id
 strategyController.show = function(req, res) {
+  console.log("does username print below");
+  console.log(USERNAME);
   Strategy.findOne({_id: req.params.id}).exec(function (err, strategy) {
     if (err) {
       console.log("Error:", err);
@@ -34,6 +36,9 @@ strategyController.create = function(req, res) {
 
 // Save new strategy
 strategyController.save = function(req, res) {
+  var name = USERNAME
+  console.log(name.email)
+  req.body.name = name.email
   var strategy = new Strategy(req.body);
 
   strategy.save(function(err) {
@@ -54,6 +59,7 @@ strategyController.edit = function(req, res) {
       console.log("Error:", err);
     }
     else {
+      console.log(strategy);
       res.render("../views/strategies/edit", {strategy: strategy});
     }
   });
@@ -61,7 +67,7 @@ strategyController.edit = function(req, res) {
 
 // Update an strategy
 strategyController.update = function(req, res) {
-  Strategy.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, variables: req.body.address, currency: req.body.position, coin: req.body.salary }}, { new: true }, function (err, strategy) {
+  Strategy.findByIdAndUpdate(req.params.id, { $set: { name: req.body.name, variables: req.body.variables, currency: req.body.currency, coin: req.body.coin }}, { new: true }, function (err, strategy) {
     if (err) {
       console.log(err);
       res.render("../views/strategies/edit", {strategy: req.body});
