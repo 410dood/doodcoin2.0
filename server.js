@@ -86,6 +86,11 @@ app.get('/login', function (req, res) {
   res.render('login');
 });
 
+
+app.get('/strategies/index', function (req, res) {
+	res.render('/strategies/index');
+});
+
 // listen on port 3000
 // app.listen(3000, function () {
 //   console.log('server started on locahost:3000');

@@ -40,7 +40,8 @@ $(document).ready(function(){
 			method : "POST",
 			data : formData,
 			success : function(response){
-				window.location = "/profile"
+				//window.location = "/profile"
+				window.location = "/strategies/index"   //need to make a route first if i want to point here
 			}
 		})
 
